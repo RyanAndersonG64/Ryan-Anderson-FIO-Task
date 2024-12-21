@@ -5,7 +5,7 @@ import axios from 'axios'
 export const locationCheck = ({ city, state }) => {
   return axios({
     method: 'get',
-    url: `http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},US&limit=1&appid=4ec8e174794a1b4bf79276d10fe060be`,
+    url: `https://api.openweathermap.org/geo/1.0/direct?q=${city},${state},US&limit=1&appid=4ec8e174794a1b4bf79276d10fe060be`,
     
   }).then(response => {
     return response
