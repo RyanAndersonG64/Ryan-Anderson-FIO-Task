@@ -10,6 +10,9 @@ function App() {
   const [state, setState] = useState('')
   const [weather, setWeather] = useState()
 
+
+  // Weather data is broken into 3 hour increments; the states below are used to aggregate the incremental data into one overall daily forecast
+
   const [day1, setDay1] = useState()
   const [day1Main, setDay1Main] = useState('')
   const [day1Icon, setDay1Icon] = useState('')
@@ -43,7 +46,10 @@ function App() {
   const stateCodes = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
 
 
-  // Aggregates the 3-hour data for each day into a 'main' condition; the condition that is displayed is the most severe condition predicted during that day
+  // Aggregates the 3-hour data for each day into a 'main' condition, and high and low temperatures
+
+
+  // Day 1
 
   useEffect(() => {
     if (day1) {
@@ -66,6 +72,9 @@ function App() {
 
       }
 
+
+      // The most severe condition appearing during the day will be the one displayed on the forecast
+
       if (conditions['Thunderstorm'] > 0) {
         setDay1Main('Thunderstorm')
         setDay1Icon('11d')
@@ -83,12 +92,17 @@ function App() {
         setDay1Icon('01d')
       }
 
+      // Converts the high and low temperatures from Kelvin to Fahrenheit
+
       setDay1High(Math.round(((highTemp - 273.15) * 1.8 + 32) * 10) / 10)
       setDay1Low(Math.round(((lowTemp - 273.15) * 1.8 + 32) * 10) / 10)
 
     }
   }
     , [day1])
+
+
+  // Day 2
 
   useEffect(() => {
     if (day2) {
@@ -111,6 +125,8 @@ function App() {
 
       }
 
+      // The most severe condition appearing during the day will be the one displayed on the forecast
+
       if (conditions['Thunderstorm'] > 0) {
         setDay2Main('Thunderstorm')
         setDay2Icon('11d')
@@ -128,12 +144,17 @@ function App() {
         setDay2Icon('01d')
       }
 
+      // Converts the high and low temperatures from Kelvin to Fahrenheit
+
       setDay2High(Math.round(((highTemp - 273.15) * 1.8 + 32) * 10) / 10)
       setDay2Low(Math.round(((lowTemp - 273.15) * 1.8 + 32) * 10) / 10)
 
     }
   }
     , [day2])
+
+
+  // Day 3
 
   useEffect(() => {
     if (day3) {
@@ -156,6 +177,8 @@ function App() {
 
       }
 
+      // The most severe condition appearing during the day will be the one displayed on the forecast
+
       if (conditions['Thunderstorm'] > 0) {
         setDay3Main('Thunderstorm')
         setDay3Icon('11d')
@@ -173,12 +196,17 @@ function App() {
         setDay3Icon('01d')
       }
 
+      // Converts the high and low temperatures from Kelvin to Fahrenheit
+
       setDay3High(Math.round(((highTemp - 273.15) * 1.8 + 32) * 10) / 10)
       setDay3Low(Math.round(((lowTemp - 273.15) * 1.8 + 32) * 10) / 10)
 
     }
   }
     , [day3])
+
+
+  // Day 4
 
   useEffect(() => {
     if (day4) {
@@ -201,6 +229,8 @@ function App() {
 
       }
 
+      // The most severe condition appearing during the day will be the one displayed on the forecast
+
       if (conditions['Thunderstorm'] > 0) {
         setDay4Main('Thunderstorm')
         setDay4Icon('11d')
@@ -218,12 +248,17 @@ function App() {
         setDay4Icon('01d')
       }
 
+      // Converts the high and low temperatures from Kelvin to Fahrenheit
+
       setDay4High(Math.round(((highTemp - 273.15) * 1.8 + 32) * 10) / 10)
       setDay4Low(Math.round(((lowTemp - 273.15) * 1.8 + 32) * 10) / 10)
 
     }
   }
     , [day4])
+
+
+  // Day 5
 
   useEffect(() => {
     if (day5) {
@@ -246,6 +281,8 @@ function App() {
 
       }
 
+      // The most severe condition appearing during the day will be the one displayed on the forecast
+
       if (conditions['Thunderstorm'] > 0) {
         setDay5Main('Thunderstorm')
         setDay5Icon('11d')
@@ -262,6 +299,8 @@ function App() {
         setDay5Main('Clear')
         setDay5Icon('01d')
       }
+
+      // Converts the high and low temperatures from Kelvin to Fahrenheit
 
       setDay5High(Math.round(((highTemp - 273.15) * 1.8 + 32) * 10) / 10)
       setDay5Low(Math.round(((lowTemp - 273.15) * 1.8 + 32) * 10) / 10)
@@ -283,15 +322,9 @@ function App() {
         <div className='forecast-container'>
 
           <div className='forecast'>
-            <h3>{day1[0].dt_txt.slice(0, 11)}</h3>
 
-            {/* {day1 && day1.map(day => (
-              <div className='weather-data'>
-                <h5>{day.weather[0].main}</h5>
-                <img className='weather-icon' src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} />
-                <br></br>
-              </div>
-            ))} */}
+            {/* Displays the date without time, since only one condition per day is being displayed */}
+            <h3>{day1[0].dt_txt.slice(0, 11)}</h3>
 
             <div className='weather-data'>
               <h5>{day1Main}
@@ -300,6 +333,17 @@ function App() {
               <h5>High: {day1High} °F</h5>
               <h5>Low: {day1Low} °F</h5>
             </div>
+
+
+            {/* This could be used in the future to allow the user to see a more detailed forecast for the day */}
+
+            {/* {day1 && day1.map(day => (
+              <div className='weather-data'>
+                <h5>{day.weather[0].main}</h5>
+                <img className='weather-icon' src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} />
+                <br></br>
+              </div>
+            ))} */}
 
           </div>
 
@@ -394,7 +438,10 @@ function App() {
         City: <input type='text' onChange={(e) => {
           setCity(e.target.value)
         }} /><br></br>
-        State: <select id='state' name='state' onChange={(e) => {
+
+        {/* Since the API requires 2-letter state codes, a dropdown menu is used for state selection */}
+        State:
+        <select id='state' name='state' onChange={(e) => {
           setState(e.target.value)
         }} >
           <option value="">--</option>
@@ -415,11 +462,13 @@ function App() {
             locationCheck({ city, state })
               .then(response => {
 
+                // If location is invalid, the geolocation API returns an empty array; fetching weather data only proceeds if the array is not empty
                 if (response.data.length > 0) {
                   getWeather({ city, state })
                     .then(response => {
                       setWeather(response.data)
-                      console.log(response.data.list.slice(0, 8))
+
+                      // Separates the data into sets for each of the 5 upcoming days
                       setDay1(response.data.list.slice(0, 8))
                       setDay2(response.data.list.slice(8, 16))
                       setDay3(response.data.list.slice(16, 24))

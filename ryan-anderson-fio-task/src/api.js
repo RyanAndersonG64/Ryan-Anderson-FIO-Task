@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+// Uses geolocation API for the app to check if the location entered by the user exists
+
 export const locationCheck = ({ city, state }) => {
   return axios({
     method: 'get',
@@ -9,6 +11,10 @@ export const locationCheck = ({ city, state }) => {
     return response
   }).catch(error => console.log('ERROR: ', error))
 }
+
+
+
+// Fetches weather data after location has been validated
 
 export const getWeather = ({ city, state }) => {
     return axios({
