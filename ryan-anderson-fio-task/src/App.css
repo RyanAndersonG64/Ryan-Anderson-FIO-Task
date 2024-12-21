@@ -1,0 +1,27 @@
+#root {
+  max-width: 1280px;
+  margin: auto;
+  padding: 1%;
+  text-align: center;
+}
+
+.card {
+  padding: 2em;
+}
+
+.forecast-container {
+  width: 50vw;
+  min-width: 600px;
+  text-align: center;
+  display: flex;
+  overflow-x: scroll;
+}
+
+.forecast {
+  width: 15%;
+  min-width: 100px;
+  background-color: lightgray;
+  display: inline-block;
+  margin: auto;
+  padding: 1%;
+}
